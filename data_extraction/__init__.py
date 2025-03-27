@@ -1,0 +1,1 @@
+# Este arquivo pode estar vazio, mas é necessário para indicar que a pasta é um pacote Python.

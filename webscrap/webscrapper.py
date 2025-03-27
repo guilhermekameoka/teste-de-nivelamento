@@ -2,6 +2,8 @@ import os
 from dotenv import load_dotenv
 from utils import download_file, get_selenium_driver, zip_downloaded_files
 from bs4 import BeautifulSoup  # pip install beautifulsoup4
+import re
+from urllib.parse import urljoin
 
 # Carrega as variáveis de ambiente do arquivo .env e obtém as variáveis necessárias
 load_dotenv()
@@ -26,17 +28,20 @@ def scrape_and_download_files():
         print("Falha ao iniciar o WebDriver. Abortando...")
         return []
 
-    driver.get(URL)
-    soup = BeautifulSoup(driver.page_source, "html.parser")
-    driver.quit()  # Fecha o WebDriver após obter o conteúdo
+    try:
+        driver.get(URL)
+        soup = BeautifulSoup(driver.page_source, "html.parser")
+    finally:
+        driver.quit()  # Fecha o WebDriver após obter o conteúdo
 
     links = soup.find_all("a", href=True)
     pdf_files = []
 
     for link in links:
         href = link["href"]
-        if "Anexo-I" in href or "Anexo-II" in href:
-            full_url = href if href.startswith("http") else f"https://www.gov.br{href}"
+        if re.search(r"Anexo\s*[I|II]", link.text, re.IGNORECASE) and href.endswith(".pdf"):
+            full_url = urljoin(URL, href)
+            print(f"Arquivo encontrado: {link.text.strip()} ({href})")
             print(f"Baixando arquivo de: {full_url}")
             pdf_files.append(download_file(full_url, DOWNLOAD_DIR))
 

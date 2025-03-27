@@ -14,6 +14,7 @@ Antes de começar, certifique-se de ter os seguintes requisitos instalados:
 - Pip
 - Google Chrome
 - ChromeDriver
+
  
 ### 📦 Instalação
  
@@ -32,6 +33,10 @@ Antes de começar, certifique-se de ter os seguintes requisitos instalados:
  
 3. Configure as variáveis de ambiente no arquivo `webscrap/config.env`.
  
+### 🔧 Configuração
+
+Antes de executar o projeto, é necessário configurar o diretório de download e a URL da página a ser extraída. Edite o arquivo `webscrap/config.env` e ajuste os seguintes parâmetros conforme o uso pretendido
+
 ### 🚀 Como executar
  
 Para iniciar o processo de scraping e download:

@@ -6,7 +6,8 @@ import re
 from urllib.parse import urljoin
 
 # Carrega as variáveis de ambiente do arquivo .env e obtém as variáveis necessárias
-load_dotenv()
+dotenv_path = os.path.join(os.path.dirname(__file__), '..', '.env')
+load_dotenv(dotenv_path)
 DOWNLOAD_DIR = os.getenv("DOWNLOAD_DIR")
 URL = os.getenv("URL")
 

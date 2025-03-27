@@ -25,7 +25,7 @@ Antes de começar, certifique-se de ter os seguintes requisitos instalados:
 1. Clone este repositório:
  
    ```sh
-   git clone https://github.com/seu-usuario/teste-de-nivelamento.git
+   git clone https://github.com/guilhermekameoka/teste-de-nivelamento.git
    cd teste-de-nivelamento
    ```
  
@@ -71,7 +71,7 @@ O objetivo deste teste é realizar a extração de dados de uma tabela presente 
 
 Antes de executar o script, é necessário configurar as variáveis de ambiente. Edite o arquivo `.env` na pasta raiz do projeto e adicione o caminho para o arquivo PDF a ser processado. As variáveis de ambiente necessárias são:
 
-- **PDF_PATCH**: Caminho do arquivo PDF de entrada.
+- **PDF_PATH**: Caminho do arquivo PDF de entrada.
 
 ### 🚀 Como executar
 
@@ -84,7 +84,8 @@ python3 data_extraction/transformData.py
 
 ```sh
 # Para Mac/Linux
-python data_extraction/transformData.py
+python -m data_extraction.transformData
+
 ```
 
 Após a execução, o arquivo CSV será compactado em um arquivo ZIP com o nome `Teste_Guilherme_Kameoka.zip`.

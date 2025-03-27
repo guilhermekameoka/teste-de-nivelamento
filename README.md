@@ -37,7 +37,15 @@ Antes de começar, certifique-se de ter os seguintes requisitos instalados:
 Para iniciar o processo de scraping e download:
  
 ```sh
+# Para Windows
+cd webscrap
 python webscrapper.py
+````
+
+```sh
+# Para Mac/Linux
+cd webscrap
+python3 webscrapper.py
 ```
  
 Após a execução, os arquivos baixados serão compactados no arquivo `anexos.zip`.
@@ -55,4 +63,3 @@ Após a execução, os arquivos baixados serão compactados no arquivo `anexos.z
 Este projeto é apenas para fins de avaliação e não possui licença oficial.
  
 ---
-

@@ -3,3 +3,5 @@ lxml
 selenium
 webdriver-manager
 python-dotenv
+pdfplumber
+pandas

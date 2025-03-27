@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from webscrap.utils import download_file, get_selenium_driver, zip_downloaded_files
+from utils import download_file, get_selenium_driver, zip_downloaded_files
 from bs4 import BeautifulSoup  # pip install beautifulsoup4
 
 # Carrega as variáveis de ambiente do arquivo .env e obtém as variáveis necessárias

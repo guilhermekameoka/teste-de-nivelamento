@@ -1,53 +1,20 @@
-import pdfplumber
-import pandas as pd
-import zipfile
 import os
-from dotenv import load_dotenv
+from data_extraction.utils.config import PDF_PATH, CSV_FILENAME, ZIP_FILENAME
+from data_extraction.utils.pdf_extractor import extract_data_from_pdf
+from data_extraction.utils.data_cleaner import clean_and_transform_data
+from data_extraction.utils.csv_handler import save_to_csv
+from data_extraction.utils.zip_handler import compress_to_zip
 
-# Carregar as variáveis do arquivo .env
-dotenv_path = os.path.join(os.path.dirname(__file__), '..', '.env')
-load_dotenv(dotenv_path)
+if not PDF_PATH or not os.path.exists(PDF_PATH):
+    print(f"Erro: O arquivo {PDF_PATH} não foi encontrado ou o caminho está incorreto.")
+    exit(1)
 
-# Nome do arquivo PDF de entrada (do .env)
-pdf_path = os.getenv("PDF_PATCH")
+print(f"Lendo PDF: {PDF_PATH}")
+data = extract_data_from_pdf(PDF_PATH)
 
-# Verificação para garantir que o caminho do arquivo PDF foi carregado corretamente
-if not pdf_path or not os.path.exists(pdf_path):
-    print(f"Erro: O arquivo {pdf_path} não foi encontrado ou o caminho está incorreto.")
-else:
-    # Nome do arquivo CSV e ZIP de saída
-    csv_filename = "Teste_Guilherme_Kameoka.csv"
-    zip_filename = "Teste_Guilherme_Kameoka.zip"
+if data is None:
+    exit(1)
 
-    # Lista para armazenar os dados extraídos
-    data = []
-
-    # Função para limpar o texto extraído
-    def clean_text(text):
-        return text.replace("\n", " ").strip()
-
-    # Extração dos dados do PDF
-    with pdfplumber.open(pdf_path) as pdf:
-        for page in pdf.pages:
-            table = page.extract_table()
-            if table:
-                for row in table:
-                    data.append([clean_text(cell) if cell else "" for cell in row])
-
-    # Criar um DataFrame do Pandas
-    df = pd.DataFrame(data)
-
-    # Substituir as abreviações OD e AMB
-    df = df.replace({"OD": "Seg. Odontológica", "AMB": "Seg. Ambulatorial"})
-
-    # Salvar os dados em CSV
-    df.to_csv(csv_filename, index=False, encoding="utf-8")
-
-    # Compactar o arquivo CSV em um ZIP
-    with zipfile.ZipFile(zip_filename, "w", zipfile.ZIP_DEFLATED) as zipf:
-        zipf.write(csv_filename)
-
-    # Remover o arquivo CSV original após compactação
-    os.remove(csv_filename)
-
-    print(f"Transformação concluida. Arquivo salvo como {zip_filename}.")
+df = clean_and_transform_data(data)
+save_to_csv(df, CSV_FILENAME)
+compress_to_zip(CSV_FILENAME, ZIP_FILENAME)

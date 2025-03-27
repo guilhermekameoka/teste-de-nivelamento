@@ -38,14 +38,12 @@ Para iniciar o processo de scraping e download:
  
 ```sh
 # Para Windows
-cd webscrap
-python webscrapper.py
+python3 webscrap/webscrapper.py
 ````
 
 ```sh
 # Para Mac/Linux
-cd webscrap
-python3 webscrapper.py
+python webscrap/webscrapper.py
 ```
  
 Após a execução, os arquivos baixados serão compactados no arquivo `anexos.zip`.

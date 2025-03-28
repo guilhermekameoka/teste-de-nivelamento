@@ -2,7 +2,8 @@
 
 - [1. Teste de Web Scraping](#1-teste-de-web-scraping)
 - [2. Teste de Transformação de Dados](#2-teste-de-transformação-de-dados)
-- [3. Teste de API](#3-teste-de-api)
+- [3. Teste de Banco de Dados](#3-teste-de-banco-de-dados)
+- [4. Teste de API](#4-teste-de-api)
 
 
 ## 1. Teste de Web Scraping
@@ -105,8 +106,192 @@ Após a execução, o arquivo CSV será compactado em um arquivo ZIP com o nome 
 - zipfile
 - dotenv
 
+## 3. Teste de Banco de Dados
 
-## 3. Teste de API
+### 1. Query para estruturar a tabela
+
+```sql
+CREATE TABLE health_expenses (
+    data DATE NOT NULL,
+    reg_ans VARCHAR(20) NOT NULL,
+    cd_conta_contabil VARCHAR(20) NOT NULL,
+    descricao VARCHAR(255),
+    vl_saldo_inicial DECIMAL(15,2),
+    vl_saldo_final DECIMAL(15,2)
+);
+```
+
+### 2. Queries para importar o conteúdo dos arquivos preparados
+```sql
+   -- Importa os dados do 1º Trimestre de 2023
+LOAD DATA INFILE '/Users/guilhermekameoka/Desktop/prova/database/financial_statements/2023/1T2023.csv'
+INTO TABLE health_expenses
+CHARACTER SET utf8
+FIELDS TERMINATED BY ';'
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES
+(@data, @reg_ans, @cd_conta_contabil, @descricao, @vl_saldo_inicial, @vl_saldo_final)
+SET
+   data = STR_TO_DATE(@data, '%Y-%m-%d'),
+   reg_ans = TRIM(@reg_ans),
+   cd_conta_contabil = TRIM(@cd_conta_contabil),
+   descricao = TRIM(@descricao),
+   vl_saldo_inicial = CAST(REPLACE(@vl_saldo_inicial, ',', '.') AS DECIMAL(15,2)),
+   vl_saldo_final = CAST(REPLACE(@vl_saldo_final, ',', '.') AS DECIMAL(15,2));
+
+-- Importa os dados do 2º Trimestre de 2023
+LOAD DATA INFILE '/Users/guilhermekameoka/Desktop/prova/database/financial_statements/2023/2T2023.csv'
+INTO TABLE health_expenses
+CHARACTER SET utf8
+FIELDS TERMINATED BY ';'
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES
+(@data, @reg_ans, @cd_conta_contabil, @descricao, @vl_saldo_inicial, @vl_saldo_final)
+SET
+   data = STR_TO_DATE(@data, '%Y-%m-%d'),
+   reg_ans = @reg_ans,
+   cd_conta_contabil = @cd_conta_contabil,
+   descricao = @descricao,
+   vl_saldo_inicial = REPLACE(@vl_saldo_inicial, ',', '.'),
+   vl_saldo_final = REPLACE(@vl_saldo_final, ',', '.');
+
+-- Importa os dados do 3º Trimestre de 2023
+LOAD DATA INFILE '/Users/guilhermekameoka/Desktop/prova/database/financial_statements/2023/3T2023.csv'
+INTO TABLE health_expenses
+CHARACTER SET utf8
+FIELDS TERMINATED BY ';'
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES
+(@data, @reg_ans, @cd_conta_contabil, @descricao, @vl_saldo_inicial, @vl_saldo_final)
+SET
+   data = STR_TO_DATE(@data, '%Y-%m-%d'),
+   reg_ans = @reg_ans,
+   cd_conta_contabil = @cd_conta_contabil,
+   descricao = @descricao,
+   vl_saldo_inicial = REPLACE(@vl_saldo_inicial, ',', '.'),
+   vl_saldo_final = REPLACE(@vl_saldo_final, ',', '.');
+   vl_saldo_final = REPLACE(@vl_saldo_final, ',', '.');
+
+-- Importa os dados do 4º Trimestre de 2023
+LOAD DATA INFILE '/Users/guilhermekameoka/Desktop/prova/database/financial_statements/2023/4T2023.csv'
+INTO TABLE health_expenses
+CHARACTER SET utf8
+FIELDS TERMINATED BY ';'
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES
+(@data, @reg_ans, @cd_conta_contabil, @descricao, @vl_saldo_inicial, @vl_saldo_final)
+SET
+   data = STR_TO_DATE(@data, '%d/%m/%Y'), -- Datas no csv estão no formato d/m/y
+   reg_ans = @reg_ans,
+   cd_conta_contabil = @cd_conta_contabil,
+   descricao = @descricao,
+   vl_saldo_inicial = REPLACE(@vl_saldo_inicial, ',', '.'),
+   vl_saldo_final = REPLACE(@vl_saldo_final, ',', '.');
+
+-- Importa os dados do 1º Trimestre de 2024
+LOAD DATA INFILE '/Users/guilhermekameoka/Desktop/prova/database/financial_statements/2024/1T2024.csv'
+INTO TABLE health_expenses
+CHARACTER SET utf8
+FIELDS TERMINATED BY ';'
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES
+(@data, @reg_ans, @cd_conta_contabil, @descricao, @vl_saldo_inicial, @vl_saldo_final)
+SET
+   data = STR_TO_DATE(@data, '%Y-%m-%d'),
+   reg_ans = @reg_ans,
+   cd_conta_contabil = @cd_conta_contabil,
+   descricao = @descricao,
+   vl_saldo_inicial = REPLACE(@vl_saldo_inicial, ',', '.'),
+   vl_saldo_final = REPLACE(@vl_saldo_final, ',', '.');
+
+-- Importa os dados do 2º Trimestre de 2024
+LOAD DATA INFILE '/Users/guilhermekameoka/Desktop/prova/database/financial_statements/2024/2T2024.csv'
+INTO TABLE health_expenses
+CHARACTER SET utf8
+FIELDS TERMINATED BY ';'
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES
+(@data, @reg_ans, @cd_conta_contabil, @descricao, @vl_saldo_inicial, @vl_saldo_final)
+SET
+   data = STR_TO_DATE(@data, '%Y-%m-%d'),
+   reg_ans = @reg_ans,
+   cd_conta_contabil = @cd_conta_contabil,
+   descricao = @descricao,
+   vl_saldo_inicial = REPLACE(@vl_saldo_inicial, ',', '.'),
+   vl_saldo_final = REPLACE(@vl_saldo_final, ',', '.');
+
+-- Importa os dados do 3º Trimestre de 2024
+LOAD DATA INFILE '/Users/guilhermekameoka/Desktop/prova/database/financial_statements/2024/3T2024.csv'
+INTO TABLE health_expenses
+CHARACTER SET utf8
+FIELDS TERMINATED BY ';'
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES
+(@data, @reg_ans, @cd_conta_contabil, @descricao, @vl_saldo_inicial, @vl_saldo_final)
+SET
+   data = STR_TO_DATE(@data, '%Y-%m-%d'),
+   reg_ans = @reg_ans,
+   cd_conta_contabil = @cd_conta_contabil,
+   descricao = @descricao,
+   vl_saldo_inicial = REPLACE(@vl_saldo_inicial, ',', '.'),
+   vl_saldo_final = REPLACE(@vl_saldo_final, ',', '.');
+
+-- Importa os dados do 4º Trimestre de 2024
+LOAD DATA INFILE '/Users/guilhermekameoka/Desktop/prova/database/financial_statements/2024/4T2024.csv'
+INTO TABLE health_expenses
+CHARACTER SET utf8
+FIELDS TERMINATED BY ';'
+ENCLOSED BY '"'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES
+(@data, @reg_ans, @cd_conta_contabil, @descricao, @vl_saldo_inicial, @vl_saldo_final)
+SET
+   data = STR_TO_DATE(@data, '%Y-%m-%d'),
+   reg_ans = @reg_ans,
+   cd_conta_contabil = @cd_conta_contabil,
+   descricao = @descricao,
+   vl_saldo_inicial = REPLACE(@vl_saldo_inicial, ',', '.'),
+   vl_saldo_final = REPLACE(@vl_saldo_final, ',', '.');
+```
+
+### 3. Queries analíticas
+   ```sql
+   -- Quais as 10 operadoras com maiores despesas em "EVENTOS/ SINISTROS CONHECIDOS OU
+-- AVISADOS DE ASSISTÊNCIA A SAÚDE MEDICO HOSPITALAR" no último trimestre?
+SELECT reg_ans, 
+       SUM(vl_saldo_final - vl_saldo_inicial) AS total_despesas
+FROM health_expenses
+WHERE descricao = "EVENTOS/SINISTROS CONHECIDOS OU AVISADOS DE ASSISTÊNCIA A SAÚDE MÉDICO HOSPITALAR"
+  AND data BETWEEN '2024-07-01' AND '2024-09-30'  -- 3º trimestre de 2024
+GROUP BY reg_ans
+ORDER BY total_despesas DESC
+LIMIT 10;
+```
+```sql
+-- Quais as 10 operadoras com maiores despesas nessa categoria no último ano?
+SELECT reg_ans, 
+       SUM(vl_saldo_final - vl_saldo_inicial) AS total_despesas
+FROM health_expenses
+WHERE descricao = "EVENTOS/SINISTROS CONHECIDOS OU AVISADOS DE ASSISTÊNCIA A SAÚDE MÉDICO HOSPITALAR"
+  AND YEAR(data) = 2024  -- ano de 2024
+GROUP BY reg_ans
+ORDER BY total_despesas DESC
+LIMIT 10;
+```
+
+### 🛠 Tecnologias utilizadas
+   - MySQL
+
+
+
+## 4. Teste de API
 
 O objetivo deste teste é permitir a consulta de informações de operadoras de saúde utilizando Vue.js.
 

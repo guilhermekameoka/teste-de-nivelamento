@@ -60,7 +60,7 @@ LINES TERMINATED BY '\r\n'
 IGNORE 1 LINES
 (@data, @reg_ans, @cd_conta_contabil, @descricao, @vl_saldo_inicial, @vl_saldo_final)
 SET
-   data = STR_TO_DATE(@data, '%d/%m/%Y'),
+   data = STR_TO_DATE(@data, '%d/%m/%Y'), -- Datas no csv estão no formato d/m/y
    reg_ans = @reg_ans,
    cd_conta_contabil = @cd_conta_contabil,
    descricao = @descricao,

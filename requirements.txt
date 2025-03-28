@@ -5,3 +5,4 @@ webdriver-manager
 python-dotenv
 pdfplumber
 pandas
+flask_cors

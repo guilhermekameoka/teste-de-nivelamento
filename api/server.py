@@ -2,12 +2,16 @@ from flask import Flask, request, jsonify, send_from_directory
 import pandas as pd
 from flask_cors import CORS
 import os
+from dotenv import load_dotenv
+
+# Carrega variáveis do arquivo .env
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app)  # Permite requisições da interface Vue.js
 
 # Carrega os dados do CSV
-csv_path = "/Users/guilhermekameoka/Desktop/prova/database/active_insurance_providers/Relatorio_cadop.csv"
+csv_path = os.getenv("CSV_PATH")
 df = pd.read_csv(csv_path, encoding="utf-8", sep=";")
 
 
@@ -45,7 +49,9 @@ def search():
     # Limita o número de resultados
     results = results.head(limit)
 
-    print("Dados retornados do servidor:", results.to_dict(orient="records"))  # Adicione o log
+    print(
+        "Dados retornados do servidor:", results.to_dict(orient="records")
+    )  # Adicione o log
     return jsonify(results.to_dict(orient="records"))
 
 

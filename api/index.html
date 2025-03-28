@@ -16,105 +16,120 @@
 
   <body>
     <div id="app">
-      <div class="container">
-        <h2>Consulta de Informações</h2>
-        <input
-          type="text"
-          v-model="query"
-          class="form-control"
-          placeholder="Digite para buscar"
-          @input="fetchResults"
-        />
+      <div class="container mt-5">
+        <h2 class="text-center text-primary">Consulta de Informações</h2>
+        <div class="row mb-4">
+          <div class="col-12">
+            <input
+              type="text"
+              v-model="query"
+              class="form-control"
+              placeholder="Digite para buscar"
+              @input="fetchResults"
+            />
+          </div>
+        </div>
 
         <div v-if="loading" class="alert alert-info">Carregando...</div>
 
         <div v-if="results.length > 0" class="list-group">
-          <div v-for="item in results" :key="item.CNPJ" class="list-group-item">
-            <p>
-              <strong>Nome Fantasia:</strong>
-              <input type="text" v-model="item.Nome_Fantasia" class="form-control" />
-            </p>
-            <p>
-              <strong>Razão Social:</strong>
-              <input type="text" v-model="item.Razao_Social" class="form-control" />
-            </p>
-            <p>
-              <strong>Endereço:</strong>
-              <input type="text" v-model="item.Logradouro" class="form-control" />
-              <input type="text" v-model="item.Numero" class="form-control" />
-            </p>
-            <p>
-              <strong>Bairro:</strong>
-              <input type="text" v-model="item.Bairro" class="form-control" />
-            </p>
-            <p>
-              <strong>Cidade:</strong>
-              <input type="text" v-model="item.Cidade" class="form-control" />
-            </p>
-            <p>
-              <strong>UF:</strong>
-              <input type="text" v-model="item.UF" class="form-control" />
-            </p>
-            <p>
-              <strong>CNPJ:</strong>
-              <input type="text" v-model="item.CNPJ" class="form-control" />
-            </p>
-            <p>
-              <strong>Representante:</strong>
-              <input type="text" v-model="item.Representante" class="form-control" />
-            </p>
-            <p>
-              <strong>Cargo Representante:</strong>
-              <input
-                type="text"
-                v-model="item.Cargo_Representante"
-                class="form-control"
-              />
-            </p>
-            <p>
-              <strong>Telefone:</strong>
-              <input type="text" v-model="item.Telefone" class="form-control" />
-            </p>
-            <p>
-              <strong>Endereço Eletrônico:</strong>
-              <input
-                type="text"
-                v-model="item.Endereco_eletronico"
-                class="form-control"
-              />
-            </p>
-            <p>
-              <strong>Data de Registro ANS:</strong>
-              <input type="text" v-model="item.Data_Registro_ANS" class="form-control" />
-            </p>
-            <p>
-              <strong>Modalidade:</strong>
-              <input type="text" v-model="item.Modalidade" class="form-control" />
-            </p>
-            <p>
-              <strong>Complemento:</strong>
-              <input type="text" v-model="item.Complemento" class="form-control" />
-            </p>
-            <p>
-              <strong>CEP:</strong>
-              <input type="text" v-model="item.CEP" class="form-control" />
-            </p>
-            <p>
-              <strong>Fax:</strong>
-              <input type="text" v-model="item.Fax" class="form-control" />
-            </p>
-            <p>
-              <strong>Região de Comercialização:</strong>
-              <input
-                type="text"
-                v-model="item.Regiao_de_Comercializacao"
-                class="form-control"
-              />
-            </p>
-            <p>
-              <strong>Registro ANS:</strong>
-              <input type="text" v-model="item.Registro_ANS" class="form-control" />
-            </p>
+          <div
+            v-for="item in results"
+            :key="item.CNPJ"
+            class="list-group-item mb-3"
+            style="margin-bottom: 20px;"
+          >
+            <div class="row">
+              <div class="col-md-6">
+                <p>
+                  <strong>Nome Fantasia:</strong>
+                  <input type="text" v-model="item.Nome_Fantasia" class="form-control" />
+                </p>
+                <p>
+                  <strong>Razão Social:</strong>
+                  <input type="text" v-model="item.Razao_Social" class="form-control" />
+                </p>
+                <p>
+                  <strong>CNPJ:</strong>
+                  <input type="text" v-model="item.CNPJ" class="form-control" />
+                </p>
+                <p>
+                  <strong>Representante:</strong>
+                  <input type="text" v-model="item.Representante" class="form-control" />
+                </p>
+                <p>
+                  <strong>Cargo Representante:</strong>
+                  <input
+                    type="text"
+                    v-model="item.Cargo_Representante"
+                    class="form-control"
+                  />
+                </p>
+                <p>
+                  <strong>Telefone:</strong>
+                  <input type="text" v-model="item.Telefone" class="form-control" />
+                </p>
+                <p>
+                  <strong>Endereço Eletrônico:</strong>
+                  <input
+                    type="text"
+                    v-model="item.Endereco_eletronico"
+                    class="form-control"
+                  />
+                </p>
+              </div>
+              <div class="col-md-6">
+                <p>
+                  <strong>Endereço:</strong>
+                  <input type="text" v-model="item.Logradouro" class="form-control" />
+                  <input type="text" v-model="item.Numero" class="form-control" />
+                </p>
+                <p>
+                  <strong>Bairro:</strong>
+                  <input type="text" v-model="item.Bairro" class="form-control" />
+                </p>
+                <p>
+                  <strong>Cidade:</strong>
+                  <input type="text" v-model="item.Cidade" class="form-control" />
+                </p>
+                <p>
+                  <strong>UF:</strong>
+                  <input type="text" v-model="item.UF" class="form-control" />
+                </p>
+                <p>
+                  <strong>Data de Registro ANS:</strong>
+                  <input type="text" v-model="item.Data_Registro_ANS" class="form-control" />
+                </p>
+                <p>
+                  <strong>Modalidade:</strong>
+                  <input type="text" v-model="item.Modalidade" class="form-control" />
+                </p>
+                <p>
+                  <strong>Complemento:</strong>
+                  <input type="text" v-model="item.Complemento" class="form-control" />
+                </p>
+                <p>
+                  <strong>CEP:</strong>
+                  <input type="text" v-model="item.CEP" class="form-control" />
+                </p>
+                <p>
+                  <strong>Fax:</strong>
+                  <input type="text" v-model="item.Fax" class="form-control" />
+                </p>
+                <p>
+                  <strong>Região de Comercialização:</strong>
+                  <input
+                    type="text"
+                    v-model="item.Regiao_de_Comercializacao"
+                    class="form-control"
+                  />
+                </p>
+                <p>
+                  <strong>Registro ANS:</strong>
+                  <input type="text" v-model="item.Registro_ANS" class="form-control" />
+                </p>
+              </div>
+            </div>
           </div>
         </div>
         <div v-if="results.length === 0 && !loading" class="alert alert-warning">

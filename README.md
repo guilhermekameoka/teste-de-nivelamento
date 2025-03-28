@@ -152,6 +152,12 @@ python3 api/server.py
 python api/server.py
 ```
 
+### 👨‍🚀 Postman
+
+<img src="./api/assets/postman.png" size=40%>
+<img src="./api/assets/postman2.png" size=40%>
+<img src="./api/assets/postman3.png" size=40%>
+
 ### 🛠 Tecnologias utilizadas
 
 - Python

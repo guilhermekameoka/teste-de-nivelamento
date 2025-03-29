@@ -339,7 +339,7 @@ python api/server.py
 
 Em seguida abra seu navegador de preferência e siga os passaos abaixo:
 
-1. No endereço URL, acesse 127.0.0.1:5001
+1. No endereço URL, acesse [localhost:5001](127.0.0.1:5001)
 2. Entre com sua consulta no campo de busca indicado
 
 ![Consulta](./api/assets/consulta.png)

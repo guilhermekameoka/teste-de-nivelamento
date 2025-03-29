@@ -293,7 +293,7 @@ LIMIT 10;
 
 ## 4. Teste de API
 
-O objetivo deste teste é permitir a consulta de informações de operadoras de saúde utilizando Vue.js.
+O objetivo deste teste é permitir a consulta de informações de operadoras de saúde de um arquivo csv, utilizando Vue.js.
 
 ### 📋 Pré-requisitos
 
@@ -337,11 +337,18 @@ python3 api/server.py
 python api/server.py
 ```
 
+Em seguida abra seu navegador de preferência e siga os passaos abaixo:
+
+1. No endereço URL, acesse 127.0.0.1:5001
+2. Entre com sua consulta no campo de busca indicado
+
+![Consulta](./api/assets/consulta.png)
+
 ### 👨‍🚀 Postman
 
-<img src="./api/assets/postman.png" size=40%>
-<img src="./api/assets/postman2.png" size=40%>
-<img src="./api/assets/postman3.png" size=40%>
+![Postman](./api/assets/postman.png)
+![Postman 2](./api/assets/postman2.png)
+![Postman 3](./api/assets/postman3.png)
 
 ### 🛠 Tecnologias utilizadas
 

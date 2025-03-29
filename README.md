@@ -346,9 +346,77 @@ Em seguida abra seu navegador de preferência e siga os passaos abaixo:
 
 ### 👨‍🚀 Postman
 
-![Postman](./api/assets/postman.png)
-![Postman 2](./api/assets/postman2.png)
-![Postman 3](./api/assets/postman3.png)
+```sh
+GET localhost:5001/search?q=ASSOCIAÇÃO DOS FISCAIS DE TRIBUTOS ESTADUAIS DO RS - AFISVEC
+```
+
+```json
+[
+    {
+        "Bairro": "CENTRO",
+        "CEP": 90010140,
+        "CNPJ": 92911056000116,
+        "Cargo_Representante": "PRESIDENTE",
+        "Cidade": "Porto Alegre",
+        "Complemento": "CONJ.1010",
+        "DDD": 51.0,
+        "Data_Registro_ANS": "1998-12-28",
+        "Endereco_eletronico": "saude@afisvec.org.br",
+        "Fax": 32244922.0,
+        "Logradouro": "RUA URUGUAI",
+        "Modalidade": "Autogestão",
+        "Nome_Fantasia": "AFISVEC - SAÚDE",
+        "Numero": "155",
+        "Razao_Social": "ASSOCIAÇÃO DOS FISCAIS DE TRIBUTOS ESTADUAIS DO RS - AFISVEC",
+        "Regiao_de_Comercializacao": 3.0,
+        "Registro_ANS": 382639,
+        "Representante": "EDUARDO JAEGER",
+        "Telefone": 32244922.0,
+        "UF": "RS"
+    }
+]
+```
+
+```sh
+GET localhost:5001/search?q=RIBEIRAO PRETO
+```
+
+```json
+[
+    {
+        "Bairro": "CENTRO",
+        "CEP": 14015080,
+        "CNPJ": 45232246000127,
+        "Cargo_Representante": "DIRETOR GERAL",
+        "Cidade": "Ribeirão Preto",
+        "Complemento": NaN,
+        "DDD": 16.0,
+        "Data_Registro_ANS": "1998-12-29",
+        "Endereco_eletronico": "ana.azenha@unimedribeirao.com.br",
+        "Fax": NaN,
+        "Logradouro": "RUA LAFAIETE",
+        "Modalidade": "Cooperativa Médica",
+        "Nome_Fantasia": "UNIMED DE RIBEIRAO PRETO",
+        "Numero": "789",
+        "Razao_Social": "UNIMED DE RIBEIRAO PRETO - COOPERATIVA DE TRABALHO MÉDICO",
+        "Regiao_de_Comercializacao": 5.0,
+        "Registro_ANS": 351202,
+        "Representante": "JULIO CESAR PAIM",
+        "Telefone": 36052212.0,
+        "UF": "SP"
+    }
+]
+```
+
+```sh
+GET localhost:5001/search?q=
+```
+
+```json
+{
+    "error": "Parâmetro de busca vazio"
+}
+```
 
 ### 🛠 Tecnologias utilizadas
 
